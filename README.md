@@ -25,6 +25,14 @@ sudo apt upgrade
 ```sh
 sudo apt install curl
 ```
+
+- Install Git & configure URLs:
+```sh
+sudo apt-get install git gitk git-gui
+git config --global url."https://github.com/".insteadOf git@github.com:
+git config --global url."https://".insteadOf git://
+```
+
 - Install Python dependencies:
 ```sh
 sudo apt-get install python3-dev python3-pip
@@ -97,12 +105,6 @@ sudo bash ./install_geographiclib_datasets.sh
 ```
 
 ## Catkin Workspace Setup:
-- Install Git & configure URLs:
-```sh
-sudo apt-get install git gitk git-gui
-git config --global url."https://github.com/".insteadOf git@github.com:
-git config --global url."https://".insteadOf git://
-```
 
 - Install catkin tools:
 ```sh
@@ -201,6 +203,7 @@ sudo make install
 
 - Update environment for Gazebo:
 ```sh
+cd ~
 echo 'source /usr/share/gazebo/setup.sh' >> ~/.bashrc
 echo 'export GAZEBO_MODEL_PATH=~/ardupilot_gazebo/models' >> ~/.bashrc
 . ~/.bashrc
