@@ -169,17 +169,98 @@ sim_vehicle.py -w
 
 ## Gazebo Installation:
 
-- 
+- Add Gazebo repository:
 ```sh
-
+sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable \
 ```
 
-- 
+- Add repository key & update:
 ```sh
-
+wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
+sudo apt update
 ```
 
-- 
+- Install Gazebo 11:
 ```sh
+sudo apt-get install gazebo11 libgazebo11-dev
+```
 
+## Gazebo Plugin Setup:
+
+- Clone and build the plugin:
+```sh
+cd ~
+git clone https://github.com/khancyr/ardupilot_gazebo.git
+cd ardupilot_gazebo
+mkdir build
+cd build
+cmake ..
+make -j4
+sudo make install
+```
+
+- Update environment for Gazebo:
+```sh
+echo 'source /usr/share/gazebo/setup.sh' >> ~/.bashrc
+echo 'export GAZEBO_MODEL_PATH=~/ardupilot_gazebo/models' >> ~/.bashrc
+. ~/.bashrc
+```
+
+## PX4 & MAVSDK Dependencies:
+
+- Add user to dialout group:
+```sh
+sudo usermod -a -G dialout $USER
+```
+
+- Install various dependencies:
+```sh
+sudo apt install -y python3-jinja2 python3-numpy python3-pandas python3-matplotlib python3-pyqt5.qtsvg protobuf-compiler libeigen3-dev \ libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gstreamer1.0-plugins-bad gstreamer1.0-plugins-good gstreamer1.0-libav gstreamer1.0-tools \ libopencv-dev ros-noetic-mavros ros-noetic-mavros-extras ros-noetic-mavros-msgs ros-noetic-mavlink ros-noetic-geographic-msgs
+```
+
+- Install Python packages via pip:
+```sh
+sudo pip3 install pyulog mavsdk
+pip install mavsdk
+pip install ultralytics
+```
+
+- Install GeographicLib geoid data:
+```sh
+wget "https://downloads.sourceforge.net/project/geographiclib/geoids-distrib/egm96-5.tar.bz2"
+tar xjf egm96-5.tar.bz2
+sudo cp -r geoids/* /usr/share/GeographicLib/geoids/
+```
+
+## PX4 Autopilot Setup:
+
+- Clone PX4 Firmware:
+```sh
+git clone https://github.com/PX4/Firmware.git --recursive
+```
+
+- Run PX4 setup script:
+```sh
+cd Firmware
+bash ./Tools/setup/ubuntu.sh
+```
+
+- Reboot system to apply changes:
+```sh
+sudo reboot
+```
+
+- Update submodules & build simulation:
+```sh
+cd Firmware
+git submodule update --init --recursive
+DONT_RUN=1 make px4_sitl_default gazebo
+```
+
+- Configure environment variables:
+```sh
+cd ~
+echo 'source Firmware/Tools/simulation/gazebo-classic/setup_gazebo.bash $(pwd) $(pwd)/build/px4_sitl_default' >> ~/.bashrc
+echo 'export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$(pwd):$(pwd)/Tools/simulation/gazebo-classic/sitl_gazebo-classic' >> ~/.bashrc
+source ~/.bashrc
 ```
