@@ -12,10 +12,9 @@
 - Ardupilot
 - Gazebo 11
 
-## Before continuing make sure you have
+## Prerequisite Installation:
 - [Ubuntu 20.04](https://releases.ubuntu.com/20.04/)
 
-## ROS İnstallation:
 - Update and upgrade system:
 ```sh
 sudo apt update
@@ -26,6 +25,12 @@ sudo apt upgrade
 ```sh
 sudo apt install curl
 ```
+- Install Python dependencies:
+```sh
+sudo apt-get install python3-dev python3-pip
+```
+
+## ROS İnstallation:
 
 - Add ROS repository:
 ```sh
@@ -63,11 +68,6 @@ source ~/.bashrc
 ```
 
 ## MAVROS Setup:
-
-- Install Python dependencies:
-```sh
-sudo apt-get install python3-dev python3-pip
-```
 
 - Install ROS package manager:
 ```sh
