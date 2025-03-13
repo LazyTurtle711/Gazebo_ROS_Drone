@@ -100,8 +100,9 @@ sudo apt-get install ros-noetic-mavros ros-noetic-mavros-extras ros-noetic-mavro
 
 - Download & install GeographicLib datasets:
 ```sh
-wget https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh
+wget https://raw.githubusercontent.com/LazyTurtle711/Gazebo_ROS_Drone/fdd11fe4b43dfa401ddb39d99b123bf88745c54a/install_geographiclib_datasets.sh
 sudo bash ./install_geographiclib_datasets.sh
+sudo rm ./install_geographiclib_datasets.sh
 ```
 
 ## Catkin Workspace Setup:
@@ -279,8 +280,8 @@ sudo nano /opt/ros/noetic/share/gazebo_ros/launch/iris_world.launch
 <?xml version="1.0"?>
 <launch>
     <arg name="vehicle" default="iris"/>
-    <arg name="sdf" default="/home/$(env USER)/Gazebo_ROS_Drone/main/iris_fpv_cam/iris_fpv_cam.sdf"/>
-    <arg name="world" default="/home/$(env USER)/Gazebo_ROS_Drone/main/iris.world"/>
+    <arg name="sdf" default="/home/$(env USER)/Gazebo_ROS_Drone/iris_fpv_cam/iris_fpv_cam.sdf"/>
+    <arg name="world" default="/home/$(env USER)/Gazebo_ROS_Drone/iris.world"/>
 
     <include file="/home/$(env USER)/Firmware/launch/mavros_posix_sitl.launch">
         <arg name="respawn_gazebo" value="true"/>
