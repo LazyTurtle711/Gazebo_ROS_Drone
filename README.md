@@ -273,8 +273,8 @@ sudo nano /opt/ros/noetic/share/gazebo_ros/launch/iris_world.launch
 <?xml version="1.0"?>
 <launch>
     <arg name="vehicle" default="iris"/>
-    <arg name="sdf" default="/home/$(env USER)/main/VsCode/iris_fpv_cam/iris_fpv_cam.sdf"/>
-    <arg name="world" default="/home/$(env USER)/main/VsCode/iris.world"/>
+    <arg name="sdf" default="/home/$(env USER)/main/iris_fpv_cam/iris_fpv_cam.sdf"/>
+    <arg name="world" default="/home/$(env USER)/main/iris.world"/>
 
     <include file="/home/$(env USER)/Firmware/launch/mavros_posix_sitl.launch">
         <arg name="respawn_gazebo" value="true"/>
