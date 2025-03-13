@@ -223,13 +223,6 @@ sudo usermod -a -G dialout $USER
 sudo apt install -y python3-jinja2 python3-numpy python3-pandas python3-matplotlib python3-pyqt5.qtsvg protobuf-compiler libeigen3-dev \ libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gstreamer1.0-plugins-bad gstreamer1.0-plugins-good gstreamer1.0-libav gstreamer1.0-tools \ libopencv-dev ros-noetic-mavros ros-noetic-mavros-extras ros-noetic-mavros-msgs ros-noetic-mavlink ros-noetic-geographic-msgs
 ```
 
-- Install Python packages via pip:
-```sh
-sudo pip3 install pyulog mavsdk
-pip install mavsdk
-pip install ultralytics
-```
-
 - Install GeographicLib geoid data:
 ```sh
 wget "https://downloads.sourceforge.net/project/geographiclib/geoids-distrib/egm96-5.tar.bz2"
@@ -271,4 +264,34 @@ source ~/.bashrc
 ```
 
 ## USAGE:
-- 
+- Create launch file
+```sh
+sudo nano /opt/ros/noetic/share/gazebo_ros/launch/iris_world.launch
+```
+- Paste into iris_world.launch
+```launch
+<?xml version="1.0"?>
+<launch>
+    <arg name="vehicle" default="iris"/>
+    <arg name="sdf" default="/home/$(env USER)/main/VsCode/iris_fpv_cam/iris_fpv_cam.sdf"/>
+    <arg name="world" default="/home/$(env USER)/main/VsCode/iris.world"/>
+
+    <include file="/home/$(env USER)/Firmware/launch/mavros_posix_sitl.launch">
+        <arg name="respawn_gazebo" value="true"/>
+        <arg name="respawn_mavros" value="true"/>
+        <arg name="vehicle" value="$(arg vehicle)"/>
+        <arg name="sdf" value="$(arg sdf)"/>
+        <arg name="verbose" value="true"/>
+        <arg name="world" value="$(arg world)"/>
+    </include>
+
+    <arg name="camera_image" default="/iris/usb_cam/image_raw"/>
+    <arg name="camera_info" default="/iris/usb_cam/camera_info"/>
+    <arg name="output_frame" default="/robot_camera_link"/>
+</launch>
+```
+
+- Start simulation
+```sh
+roslaunch gazebo_ros iris_world.launch
+```
