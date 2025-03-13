@@ -12,35 +12,35 @@
 - Ardupilot
 - Gazebo 11
 
-## Prerequisite Installation:
+## Prerequisite Installation
 - [Ubuntu 20.04](https://releases.ubuntu.com/20.04/)
 
-- Update and upgrade system:
+- Update and upgrade system
 ```sh
 sudo apt update
 sudo apt upgrade
 ```
 
-- İnstall curl:
+- İnstall curl
 ```sh
 sudo apt install curl
 ```
 
-- Install Git & configure URLs:
+- Install Git & configure URLs
 ```sh
 sudo apt-get install git gitk git-gui
 git config --global url."https://github.com/".insteadOf git@github.com:
 git config --global url."https://".insteadOf git://
 ```
 
-- Install Python dependencies:
+- Install Python dependencies
 ```sh
 sudo apt-get install python3-dev python3-pip
 ```
 
-## ROS İnstallation:
+## ROS İnstallation
 
-- Add ROS repository:
+- Add ROS repository
 ```sh
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 ```
@@ -57,12 +57,12 @@ sudo apt-get upgrade
 sudo apt install ros-noetic-desktop-full
 ```
 
-- Install additional ROS tools:
+- Install additional ROS tools
 ```sh
 sudo apt install python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
 ```
 
-- Initialize rosdep:
+- Initialize rosdep
 ```sh
 sudo rosdep init
 rosdep update
@@ -133,7 +133,9 @@ echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 ```
 
-## Ardupilot Setup:
+## SITL Installation
+
+### Ardupilot Setup:
 
 - Update and upgrade system:
 ```sh
@@ -160,7 +162,7 @@ curl -s -L https://raw.githubusercontent.com/LazyTurtle711/Gazebo_ROS_Drone/db97
 . ~/.profile
 ```
 
-## Copter Simulation:
+### Copter Simulation:
 
 - Launch ArduCopter simulation:
 ```sh
@@ -173,7 +175,7 @@ sim_vehicle.py -w
 
 - Add Gazebo repository:
 ```sh
-sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable \
+sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
 ```
 
 - Add repository key & update:
@@ -267,3 +269,6 @@ echo 'source Firmware/Tools/simulation/gazebo-classic/setup_gazebo.bash $(pwd) $
 echo 'export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$(pwd):$(pwd)/Tools/simulation/gazebo-classic/sitl_gazebo-classic' >> ~/.bashrc
 source ~/.bashrc
 ```
+
+## USAGE:
+- 
