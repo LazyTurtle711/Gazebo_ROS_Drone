@@ -130,7 +130,6 @@ sudo apt install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
 cd PX4-SITL_gazebo-classic
 git submodule update --init --recursive
 cd ~/catkin_ws
-catkin build
 ```
 
 - Build:
