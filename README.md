@@ -119,12 +119,28 @@ cd ~/catkin_ws/src
 git clone https://github.com/PX4/PX4-SITL_gazebo-classic.git
 ```
 
-- Initialize submodules & build:
+- Install jinja and Gstreamer:
+```sh
+pip3 install jinja2
+sudo apt install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
+```
+
+- Initialize submodules:
 ```sh
 cd PX4-SITL_gazebo-classic
 git submodule update --init --recursive
 cd ~/catkin_ws
 catkin build
+```
+
+- Build:
+```sh
+catkin build
+```
+
+- Build with this if you're low on RAM:
+```sh
+catkin build -j2 -p1
 ```
 
 - Update environment:
